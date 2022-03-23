@@ -1,22 +1,17 @@
-import { useEffect, useState } from "react";
-import * as axios from "axios";
-import LoginForm from "./Components/Molecules/Login/index";
-import VideoForm from "./Components/Molecules/Video/index";
-import ActionImg from "./Components/Molecules/ActionImg/index";
+import { Routes, Route } from "react-router-dom";
+
+import LoginPage from "./Components/Pages/LoginPage.jsx";
+import MainPage from "./Components/Pages/MainPage.jsx";
+import InfoPage from "./Components/Pages/InfoPage.jsx";
 
 const App = () => {
-  const a = async () => {
-    const { data } = await axios.get("./test.json");
-
-    alert(data);
-  }
-  useEffect(() => {
-    a()
-  }, [])
-  return <div>
-    <ActionImg />
-    <LoginForm></LoginForm>
-  </div>;
+  return (
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/info/:id" element={<InfoPage />} />
+    </Routes>
+  );
 };
 
 export default App;
