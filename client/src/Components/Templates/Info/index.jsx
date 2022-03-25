@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import _Modal from "../../Molecules/Modal";
 import { SERVER_URL, DEPLOYMENT_URL } from "../../../Common/Constant";
-import { ImgStyle } from "./style";
+import { ImgStyle, Container } from "./style";
 
 const InfoTemplate = () => {
   const { id } = useParams();
@@ -26,11 +26,10 @@ const InfoTemplate = () => {
   }, []);
 
   return (
-    <div>
+    <Container>
       <ImgStyle src={log.url} alt={log.actionType} />
-
       <_Modal log={log} />
-    </div>
+    </Container>
   );
 };
 
