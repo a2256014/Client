@@ -7,7 +7,6 @@ import { ImgStyle, Container } from "./style";
 
 const InfoTemplate = () => {
 	const { id } = useParams();
-	console.log(ALERT_GET_URL(id));
 	const [log, setLog] = useState({
 		actionType: "",
 		upper_leftx: 0,
@@ -29,9 +28,6 @@ const InfoTemplate = () => {
 			},
 		} = await axios.get(ALERT_GET_URL(id));
 
-		console.log(ALERT_GET_URL(id));
-
-		console.log(await axios.get(ALERT_GET_URL(id)));
 		setLog({
 			actionType,
 			upper_leftx,
@@ -41,7 +37,6 @@ const InfoTemplate = () => {
 			capture_file,
 		});
 	};
-	console.log(log);
 	useEffect(() => {
 		getLogData(id);
 	}, []);
