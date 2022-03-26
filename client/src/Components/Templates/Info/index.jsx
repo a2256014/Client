@@ -6,6 +6,7 @@ import {
   SERVER_URL,
   DEPLOYMENT_URL,
   ALERT_GET_URL,
+  DEPLOYMENT_ALERT_GET_URl,
 } from "../../../Common/Constant";
 import { ImgStyle, Container } from "./style";
 
@@ -31,9 +32,11 @@ const InfoTemplate = () => {
         bottom_righty,
         capture_file,
       },
-    } = await axios.get(ALERT_GET_URL(id));
+    } = await axios.get(DEPLOYMENT_ALERT_GET_URl(id));
 
-    console.log(await axios.get(ALERT_GET_URL(id)));
+    console.log(DEPLOYMENT_ALERT_GET_URl(id));
+
+    console.log(await axios.get(DEPLOYMENT_ALERT_GET_URl(id)));
     setLog({
       actionType,
       upper_leftx,
