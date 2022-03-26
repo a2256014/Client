@@ -1,5 +1,3 @@
-console.log(process.env);
-
 export const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 export const BASIC_API_URL = process.env.REACT_APP_BASIC_API_URL;
