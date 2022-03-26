@@ -7,9 +7,11 @@ const Header = () => {
   const handleLogo = () => navigator("/");
 
   return (
-    <Container>
-      <Logo onClick={handleLogo}>Stop!</Logo>
-    </Container>
+    <>
+      <Container>
+        <Logo onClick={handleLogo}> Stop!</Logo>
+      </Container>
+    </>
   );
 };
 export default Header;

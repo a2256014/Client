@@ -1,11 +1,24 @@
 import styled from "styled-components";
 import { GreyColor, HoverPointer, RedColor } from "../../../Common/Style/index";
 
+export const navBar = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const Menu = styled.ul`
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+`;
+
 export const Container = styled.header`
   width: 85vw;
   height: 100px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin: auto;
   margin-left: 20px;
   margin-bottom: 50px;
