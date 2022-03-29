@@ -1,5 +1,6 @@
 import { Container, Logo } from "./style";
 import { useNavigate } from "../../../../node_modules/react-router-dom/index";
+import NavBar from "../NavBar/index";
 
 const Header = () => {
   const navigator = useNavigate();
@@ -10,6 +11,7 @@ const Header = () => {
     <>
       <Container>
         <Logo onClick={handleLogo}> Stop!</Logo>
+        <NavBar />
       </Container>
     </>
   );
