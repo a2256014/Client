@@ -2,22 +2,20 @@ import styled from "styled-components";
 import { GreyColor, HoverPointer, RedColor } from "../../../Common/Style/index";
 
 export const Container = styled.header`
-  width: 85vw;
-  height: 100px;
+  height: 70px;
   display: flex;
   align-items: center;
-  margin: auto;
-  margin-left: 20px;
+  justify-content: space-between;
   margin-bottom: 50px;
-  &::after {
+  border-bottom: 1px solid ${GreyColor};
+  /* &::after {
     position: absolute;
     content: "";
     display: block;
-    top: 100px;
-    left: -20px;
+    top: 80px;
     width: 100vw;
     border-bottom: 1px solid ${GreyColor};
-  }
+  } */
 `;
 
 export const Logo = styled.p`
@@ -25,6 +23,7 @@ export const Logo = styled.p`
   transition: 0.3s;
   font-family: "Fira Mono", monospace;
   position: relative;
+  margin-left: 50px;
 
   &:hover {
     ${HoverPointer};

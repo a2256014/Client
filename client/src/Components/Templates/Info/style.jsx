@@ -10,5 +10,4 @@ export const ImgStyle = styled.img`
   height: 100%;
   border: 0px solid black;
   margin-right: 1em;
-  object-fit: cover;
 `;

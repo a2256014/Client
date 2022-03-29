@@ -1,46 +1,36 @@
 import styled from "styled-components";
-import { GreyColor, HoverPointer, RedColor } from "../../../Common/Style/index";
 
-export const navBar = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+export const Nav = styled.div`
+  margin-left: 50px;
 `;
 
-export const Menu = styled.ul`
+export const DropMenu = styled.ul`
   display: flex;
-  list-style: none;
-  padding-left: 0;
+  flex-direction: column;
+  position: absolute;
+  top: 75px;
+  right: 10px;
+  width: 100px;
+  z-index: 3;
 `;
 
-export const Container = styled.header`
-  width: 85vw;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: auto;
-  margin-left: 20px;
-  margin-bottom: 50px;
-  &::after {
-    position: absolute;
-    content: "";
-    display: block;
-    top: 100px;
-    left: -20px;
-    width: 100vw;
-    border-bottom: 1px solid ${GreyColor};
-  }
+export const DropList = styled.li`
+  padding: 0 10px;
+  border-bottom: 1px solid #eaeaea;
+  line-height: 25px;
+  border-radius: 4px;
+  background-color: black;
+  block-size: 40px;
 `;
 
-export const Logo = styled.p`
-  font-size: 24px;
-  transition: 0.3s;
-  font-family: "Fira Mono", monospace;
-  position: relative;
+export const MenuButton = styled.div`
+  margin-right: 50px !important;
+  display: flex;
+  font-size: 20px;
+`;
 
-  &:hover {
-    ${HoverPointer};
-    color: ${RedColor};
-  }
+export const Item = styled.div`
+  display: contents;
+  font-size: 15px;
+  align-content: center;
 `;
