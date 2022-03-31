@@ -1,8 +1,46 @@
 {
-  "log": {
-    "id": 1,
-    "time": "14:27:34",
-    "actionType": "폭행",
-    "url": "/폭행.jpg"
+  "data": {
+    "logs": [
+      {
+        "emergency_type": { "type_name_kor": "폭력" },
+        "upper_leftx": 1,
+        "upper_lefty": 1,
+        "bottom_rightx": 5,
+        "bottom_righty": 5,
+        "capture_file": {
+          "file_path": "./폭행.jpg"
+        }
+      },
+      {
+        "emergency_type": { "type_name_kor": "폭력" },
+        "upper_leftx": 1,
+        "upper_lefty": 1,
+        "bottom_rightx": 5,
+        "bottom_righty": 5,
+        "capture_file": {
+          "file_path": "./폭행.jpg"
+        }
+      },
+      {
+        "emergency_type": { "type_name_kor": "폭력" },
+        "upper_leftx": 1,
+        "upper_lefty": 1,
+        "bottom_rightx": 5,
+        "bottom_righty": 5,
+        "capture_file": {
+          "file_path": "./폭행.jpg"
+        }
+      },
+      {
+        "emergency_type": { "type_name_kor": "폭력" },
+        "upper_leftx": 1,
+        "upper_lefty": 1,
+        "bottom_rightx": 5,
+        "bottom_righty": 5,
+        "capture_file": {
+          "file_path": "./폭행.jpg"
+        }
+      }
+    ]
   }
 }
