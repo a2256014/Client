@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "../../../../node_modules/react-router-dom/index";
@@ -7,6 +7,7 @@ import { DropList, DropMenu, Item, MenuButton } from "./style";
 import { ItemData } from "./ItemData";
 
 const NavBar = () => {
+  const [itemshow, setitemshow] = useState(false);
   const [show, setShow] = useState(false);
   const showMenu = () => {
     setShow(!show);
@@ -25,6 +26,14 @@ const NavBar = () => {
     };
   });
 
+  useEffect(() => {
+    if (localStorage.key("accessToken") != null) {
+      setitemshow(true);
+    } else {
+      setitemshow(false);
+    }
+  }, []);
+
   return (
     <>
       {show ? (
@@ -34,7 +43,7 @@ const NavBar = () => {
           </MenuButton>
           <DropMenu>
             {ItemData.map((item, index) => {
-              return (
+              return item.isLogin === itemshow ? (
                 <Link to={item.path} onClick={showMenu}>
                   <DropList>
                     <Item>
@@ -42,7 +51,7 @@ const NavBar = () => {
                     </Item>
                   </DropList>
                 </Link>
-              );
+              ) : null;
             })}
           </DropMenu>
         </>

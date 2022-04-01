@@ -1,4 +1,3 @@
-import { SERVER_URL } from "../../../Common/Constant/index";
 import { Container } from "./Style";
 
 const VideoForm = () => {

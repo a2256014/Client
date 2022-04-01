@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LForm = styled.div`
+export const UpForm = styled.div`
   align-items: center;
   max-width: 500px;
   min-width: 300px;
@@ -49,7 +49,7 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  margin-top: 20px;
+  margin-top: 100px;
 
   border-radius: 25px;
   width: 80%;
@@ -64,24 +64,4 @@ export const Button = styled.button`
   :hover {
     opacity: 0.8;
   }
-`;
-
-export const ButtonGroup = styled.div`
-  margin-top: 50px;
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const IconGroup = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-export const GoogleIcon = styled.a`
-  background-image: url("https://image.flaticon.com/icons/svg/145/145804.svg");
-  background-repeat: no-repeat;
-  width: 3rem;
-  height: 3rem;
 `;
