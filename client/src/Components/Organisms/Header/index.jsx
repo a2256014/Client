@@ -10,8 +10,8 @@ const Header = () => {
   return (
     <>
       <Container>
-        <Logo onClick={handleLogo}> Stop!</Logo>
         <NavBar />
+        <Logo onClick={handleLogo}> Stop!</Logo>
       </Container>
     </>
   );

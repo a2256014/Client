@@ -1,4 +1,8 @@
 import styled from "styled-components";
-export const Button = styled.button`
-  background-color: aliceblue;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: large;
 `;

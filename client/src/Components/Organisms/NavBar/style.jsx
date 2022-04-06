@@ -7,9 +7,9 @@ export const Nav = styled.div`
 export const DropMenu = styled.ul`
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   top: 75px;
-  right: 10px;
+  left: 10px;
   width: 100px;
   z-index: 3;
 `;
@@ -24,7 +24,8 @@ export const DropList = styled.li`
 `;
 
 export const MenuButton = styled.div`
-  margin-right: 50px !important;
+  margin-left: 40px;
+  margin-right: 20px;
   display: flex;
   font-size: 20px;
 `;

@@ -12,16 +12,18 @@ const _Modal = ({
     setmodalMode(false);
   };
 
-  return modalMode ? (
-    <ModalContainer onClick={ModalClose}>
-      <ModalStyle onClick={(e) => e.stopPropagation()}>
-        <Title>위험 상황 발생</Title>
-        <Text>발생 시간 : {time.replace("T", " ")}</Text>
-        <Text>위험 행위 : {actionType}</Text>
-        <ModalButton onClick={ModalClose}>닫기</ModalButton>
-      </ModalStyle>
-    </ModalContainer>
-  ) : null;
+  return (
+    modalMode && (
+      <ModalContainer onClick={ModalClose}>
+        <ModalStyle onClick={(e) => e.stopPropagation()}>
+          <Title>위험 상황 발생</Title>
+          <Text>발생 시간 : {time.replace("T", " ")}</Text>
+          <Text>위험 행위 : {actionType}</Text>
+          <ModalButton onClick={ModalClose}>닫기</ModalButton>
+        </ModalStyle>
+      </ModalContainer>
+    )
+  );
 };
 
 export default _Modal;

@@ -8,3 +8,7 @@ export const ALERT_GET_URL = (id) =>
   `${SERVER_URL}${BASIC_API_URL}${ALERT_GET_URL_BASIC}/${id}`;
 
 export const SOCKET_SERVER_URL = process.env.REACT_APP_SOCKET_SERVER_URL;
+
+export const SIGNIN_SERVER_URL = process.env.REACT_SIGNIN_SERVER_URL;
+
+export const SIGNUP_SERVER_URL = process.env.REACT_SIGNUP_SERVER_URL;

@@ -5,7 +5,7 @@ export const Container = styled.header`
   height: 70px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+
   margin-bottom: 50px;
   border-bottom: 1px solid ${GreyColor};
   /* &::after {
@@ -23,7 +23,6 @@ export const Logo = styled.p`
   transition: 0.3s;
   font-family: "Fira Mono", monospace;
   position: relative;
-  margin-left: 50px;
 
   &:hover {
     ${HoverPointer};

@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-export const LForm = styled.div`
+export const UpForm = styled.div`
   align-items: center;
   width: 450px;
   height: 100%;
-  min-height: 400px;
+  max-height: 900px;
+  min-height: 530px;
   margin: 150px auto;
   background-color: black;
   border-radius: 25px;
@@ -13,13 +14,16 @@ export const LForm = styled.div`
   flex-direction: column;
 `;
 
-export const Signup = styled.a`
-  display: inline;
+export const Back = styled.a`
+  margin-top: 25px;
+  margin-right: 260px;
+
   text-decoration: underline;
   cursor: pointer;
 `;
 
-export const Text = styled.div`
-  margin-top: 20px;
-  display: inline;
+export const Dismatch = styled.div`
+  color: red;
+  margin-top: 5px;
+  margin-left: 160px;
 `;
