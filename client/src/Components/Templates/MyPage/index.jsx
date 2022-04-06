@@ -1,16 +1,13 @@
-import { Button, Container } from "./style";
+import { Container } from "./style";
 import * as axios from "axios";
 import { useEffect, useState } from "react";
+import { Button } from "../../Atoms/Button/style";
+import Logout from "../../../Common/Util/Logout/index";
 
 const MyPageTemplate = () => {
   const [name, setName] = useState();
 
-  const onclick = () => {
-    localStorage.removeItem("accessToken");
-    window.location.reload();
-  };
-
-  const pull = async () => {
+  const MyInfo = async () => {
     const {
       data: { users },
     } = await axios.get("/test.json");
@@ -20,13 +17,13 @@ const MyPageTemplate = () => {
   };
 
   useEffect(() => {
-    pull();
+    MyInfo();
   }, []);
 
   return (
     <Container>
       이름 : {name}
-      <Button onClick={onclick}>로그아웃</Button>
+      <Button onClick={() => dispatchEvent(Logout())}>로그아웃</Button>
     </Container>
   );
 };

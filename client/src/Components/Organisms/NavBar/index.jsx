@@ -5,9 +5,10 @@ import * as AiIcons from "react-icons/ai";
 import { Link } from "../../../../node_modules/react-router-dom/index";
 import { DropList, DropMenu, Item, MenuButton } from "./style";
 import { ItemData } from "./ItemData";
+import IsLogin from "../../../Common/Util/IsLogin/index";
+import Logout from "../../../Common/Util/Logout/index";
 
 const NavBar = () => {
-  const [itemshow, setitemshow] = useState(false);
   const [show, setShow] = useState(false);
   const showMenu = () => {
     setShow(!show);
@@ -26,14 +27,6 @@ const NavBar = () => {
     };
   });
 
-  useEffect(() => {
-    if (localStorage.key("accessToken") != null) {
-      setitemshow(true);
-    } else {
-      setitemshow(false);
-    }
-  }, []);
-
   return (
     <>
       {show ? (
@@ -43,15 +36,26 @@ const NavBar = () => {
           </MenuButton>
           <DropMenu>
             {ItemData.map((item, index) => {
-              return item.isLogin === itemshow ? (
-                <Link to={item.path} onClick={showMenu}>
-                  <DropList>
-                    <Item>
-                      {item.icon} {item.title}
-                    </Item>
-                  </DropList>
-                </Link>
-              ) : null;
+              return (
+                item.isLogin === IsLogin() &&
+                (item.title === "Logout" ? (
+                  <Link to={item.path} onClick={() => dispatchEvent(Logout())}>
+                    <DropList>
+                      <Item>
+                        {item.icon} {item.title}
+                      </Item>
+                    </DropList>
+                  </Link>
+                ) : (
+                  <Link to={item.path} onClick={showMenu}>
+                    <DropList>
+                      <Item>
+                        {item.icon} {item.title}
+                      </Item>
+                    </DropList>
+                  </Link>
+                ))
+              );
             })}
           </DropMenu>
         </>
