@@ -6,7 +6,7 @@ export const Container = styled.header`
   display: flex;
   align-items: center;
 
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   border-bottom: 1px solid ${GreyColor};
   /* &::after {
     position: absolute;

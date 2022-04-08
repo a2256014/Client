@@ -1,12 +1,8 @@
-import axios from "axios";
-
 const onLoginSuccess = (data) => {
-  const {
-    response: { access_token: accessToken },
-  } = data;
+  const { token: accessToken } = data;
   localStorage.setItem("accessToken", accessToken);
-
-  axios.defaults.headers.common["Authorization"] = `${accessToken}`;
+  localStorage.setItem("userid", 100);
+  window.location.reload();
 };
 
 export default onLoginSuccess;

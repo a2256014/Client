@@ -39,7 +39,11 @@ const NavBar = () => {
               return (
                 item.isLogin === IsLogin() &&
                 (item.title === "Logout" ? (
-                  <Link to={item.path} onClick={() => dispatchEvent(Logout())}>
+                  <Link
+                    to={item.path}
+                    key={index}
+                    onClick={() => dispatchEvent(Logout())}
+                  >
                     <DropList>
                       <Item>
                         {item.icon} {item.title}
@@ -47,7 +51,7 @@ const NavBar = () => {
                     </DropList>
                   </Link>
                 ) : (
-                  <Link to={item.path} onClick={showMenu}>
+                  <Link to={item.path} key={index} onClick={showMenu}>
                     <DropList>
                       <Item>
                         {item.icon} {item.title}
