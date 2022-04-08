@@ -10,32 +10,18 @@ export const Container = styled.div`
 export const Icons = styled.a`
   display: flex;
   align-items: center;
+  flex-direction: column;
 
   font-size: 40px;
   transition: 0.5s;
   cursor: pointer;
-`;
 
-export const A = styled.div`
-  align-items: center;
-  border-bottom: ${(probs) => probs.id === "all" && "2px solid"};
-  color: ${(probs) => probs.id === "all" && "red"};
-`;
-
-export const B = styled.div`
-  align-items: center;
-  border-bottom: ${(probs) => probs.id === "violence" && "2px solid"};
-  color: ${(probs) => probs.id === "violence" && "red"};
-`;
-
-export const C = styled.div`
-  align-items: center;
-  border-bottom: ${(probs) => probs.id === "절도" && "2px solid"};
-  color: ${(probs) => probs.id === "절도" && "red"};
+  border-bottom: ${(probs) => probs.select && "2px solid"};
+  color: ${(probs) => probs.select && "red"};
 `;
 
 export const Naming = styled.div`
   font-size: 15px;
-  margin-bottom: 10px;
-  margin-left: 8px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 `;

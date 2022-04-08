@@ -9,6 +9,7 @@ import {
 
 import {
   Contain,
+  DataInfo,
   Img,
   ListGroup,
   ListItem,
@@ -17,6 +18,7 @@ import {
   LogData,
   Next,
   ShowImg,
+  ToInfo,
 } from "./style";
 import { LOG_GET_URL } from "../../../Common/Constant/index";
 import useGetData from "../../../Common/Hook/useGetData";
@@ -43,12 +45,20 @@ const LogTemplate = () => {
 
   const CountPage = () => {
     let a = [];
-    for (let i = 1; i < data.last_page + 2; i++) {
-      a.push(
-        <Next id={i - 1} onClick={onclick2}>
-          {i}
-        </Next>
-      );
+    for (let i = 0; i < data.last_page + 1; i++) {
+      if (param.id == i) {
+        a.push(
+          <Next id={i} select="true" onClick={onclick2}>
+            {i + 1}
+          </Next>
+        );
+      } else {
+        a.push(
+          <Next id={i} select="false" onClick={onclick2}>
+            {i + 1}
+          </Next>
+        );
+      }
     }
     return a;
   };
@@ -64,41 +74,52 @@ const LogTemplate = () => {
         )
       );
     }
-  }, [param]);
+  }, [param, data]);
 
   return (
     <>
       <LogHeader />
       <LogContainer>
         <ListGroup>
-          <ListName>종류 시간</ListName>
+          <ListName>
+            학급&nbsp;&nbsp; 종류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 시간
+          </ListName>
           {filterData.map((log) => {
             return (
               <>
                 <ListItem>
                   <LogData>
-                    {`${log.classroom}반`}
-                    {log.emergency_type.type_name_kor}
-                    {log.capture_file.created_date}
+                    <DataInfo>
+                      {`${log.classroom}반`}&nbsp;&nbsp;&nbsp;&nbsp;
+                      {log.emergency_type.type_name_kor}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {log.capture_file.created_date.replace("T", " ")}
+                    </DataInfo>
                     {show == log.capture_file.file_id ? (
                       <>
                         <ShowImg
                           id={log.capture_file.file_id}
                           onClick={onclick}
                         >
+                          사진 접기
                           <BiArrowFromBottom />
                         </ShowImg>
                       </>
                     ) : (
                       <ShowImg id={log.capture_file.file_id} onClick={onclick}>
+                        사진 보기
                         <BiArrowToBottom />
                       </ShowImg>
                     )}
                   </LogData>
+                  {show == log.capture_file.file_id && (
+                    // <Img src={log.capture_file.file_path} />
+                    <div>
+                      <Img src="/폭행.jpg" />
+                      <ToInfo>자세히보기</ToInfo>
+                    </div>
+                  )}
                 </ListItem>
-                {show == log.capture_file.file_id && (
-                  <Img src={log.capture_file.file_path} />
-                )}
               </>
             );
           })}
