@@ -11,8 +11,15 @@ export const ItemData = [
     isLogin: true,
   },
   {
+    title: "Log",
+    path: "/log/all/0",
+    icon: <BsIcons.BsFillInfoCircleFill />,
+    cName: "nav-text",
+    isLogin: true,
+  },
+  {
     title: "Info",
-    path: "/Info:1",
+    path: "/Info/100",
     icon: <BsIcons.BsFillInfoCircleFill />,
     cName: "nav-text",
     isLogin: true,

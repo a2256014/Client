@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { sendMessage, useSocket } from "../../../Common/Hook/useSocket";
-import { SOCKET_SERVER_URL } from "../../../Common/Constant/index";
+import {
+  ALERT_GET_URL,
+  SOCKET_SERVER_URL,
+} from "../../../Common/Constant/index";
 
 import VideoForm from "../../Molecules/Video";
+import _Modal from "../../Molecules/Modal/index";
 
 import { VideoContainer } from "./Style";
+import GetData from "../../../Common/Util/GetData/index";
+import axios from "../../../../node_modules/axios/index";
+import { AutoHeader } from "../../../Common/Util/AutoHeader/index";
+import useGetData from "../../../Common/Hook/useGetData";
+import useAsync from "../../../Common/Hook/useAsync";
 
 const MainTemplate = () => {
-  const navigator = useNavigate();
-
   const [socket, setSocket] = useState();
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(-1);
 
   useSocket(setSocket, setId, SOCKET_SERVER_URL);
 
@@ -21,13 +28,12 @@ const MainTemplate = () => {
       : sendMessage(socket, "hi");
   });
 
-  useEffect(() => {
-    if (id === 0) return;
-    navigator(`/info/${id}`);
-  }, [id]);
+  const data = useGetData(ALERT_GET_URL(id));
+
   return (
     <>
       <VideoContainer>
+        {data === "" || <_Modal log={data} />}
         {new Array(8).fill(0).map(() => (
           <VideoForm />
         ))}

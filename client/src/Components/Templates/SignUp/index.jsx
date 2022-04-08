@@ -6,6 +6,8 @@ import { BiCctv } from "react-icons/bi";
 import { useReducer } from "react";
 import { useNavigate } from "../../../../node_modules/react-router-dom/index";
 import { InPutReducer, initialUser } from "../../../Common/Util/InPut/index";
+import axios from "../../../../node_modules/axios/index";
+import { SIGNUP_POST_URL } from "../../../Common/Constant/index";
 
 const SignUpTemplate = () => {
   const [state, dispatch] = useReducer(InPutReducer, initialUser);
@@ -13,7 +15,6 @@ const SignUpTemplate = () => {
 
   const change = (e) => {
     const changeType = e.target.attributes[1].value;
-    console.log(e.target.attributes[1].value);
     dispatch({
       type: changeType,
       username: e.target.value,
@@ -23,12 +24,30 @@ const SignUpTemplate = () => {
     });
   };
 
-  const onclick = async () => {
-    //아이디 비밀번호 보내기
-    console.log(
-      `세팅된회원${state.email},${state.password},${state.repassword},${state}`
-    );
-    nav("/");
+  const onclick = () => {
+    state.password === state.repassword
+      ? axios
+          .post(`${SIGNUP_POST_URL}`, {
+            email: state.email,
+            username: state.username,
+            password: state.password,
+          })
+          .then((response) => {
+            alert(`email : ${response.data.email}
+                이름 : ${response.data.username}
+                회원가입 성공!!`);
+            nav("/");
+          })
+          .catch((error) => {
+            alert("email이 중복됐습니다.");
+          })
+      : alert("비밀번호가 틀립니다.");
+  };
+
+  const onKeyPress = (e) => {
+    if (e.key == "Enter") {
+      onclick();
+    }
   };
 
   return (
@@ -36,7 +55,7 @@ const SignUpTemplate = () => {
       <HeaderTitle>
         <BiCctv />
       </HeaderTitle>
-      <InputGroup>
+      <InputGroup onKeyPress={onKeyPress}>
         <Input
           type="name"
           typeof="username"

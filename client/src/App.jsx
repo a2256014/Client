@@ -8,6 +8,7 @@ import PublicRoute from "./Routes/PublicRoute/index.jsx";
 import PrivateRoute from "./Routes/PrivateRoute/index.jsx";
 import SignUpPage from "./Components/Pages/SignUpPage.jsx";
 import MyPage from "./Components/Pages/MyPage.jsx";
+import LogPage from "./Components/Pages/LogPage.jsx";
 
 const App = () => {
   return (
@@ -31,8 +32,13 @@ const App = () => {
         />
         <Route
           restricted={false}
-          path="/info:id"
+          path="/info/:id"
           element={<PrivateRoute component={<InfoPage />} />} //위험행동 감지 페이지
+        />
+        <Route
+          restricted={false}
+          path="/log/:type/:id"
+          element={<PrivateRoute component={<LogPage />} />} //위험행동 감지 페이지
         />
         <Route
           restricted={false}

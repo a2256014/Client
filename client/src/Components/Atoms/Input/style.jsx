@@ -32,7 +32,7 @@ export const Input = styled.input`
   }
 `;
 
-export const InputGroup = styled.div`
+export const InputGroup = styled.button`
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
