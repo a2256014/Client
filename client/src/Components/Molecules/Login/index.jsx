@@ -11,19 +11,20 @@ import { initialUser, InPutReducer } from "../../../Common/Util/InPut/index";
 import { SIGNIN_POST_URL } from "../../../Common/Constant/index";
 
 const LoginForm = () => {
-  const [state, dispatch] = useReducer(InPutReducer, initialUser);
+	const [state, dispatch] = useReducer(InPutReducer, initialUser);
 
-  const change = (e) => {
-    const changeType = e.target.attributes[1].value;
-    dispatch({
-      type: changeType,
-      email: e.target.value,
-      password: e.target.value,
-      repassword: e.target.value,
-    });
-  };
+	const change = (e) => {
+		const changeType = e.target.attributes[1].value;
+		dispatch({
+			type: changeType,
+			email: e.target.value,
+			password: e.target.value,
+			repassword: e.target.value,
+		});
+	};
 
-  const nav = useNavigate();
+	const nav = useNavigate();
+
 
   const onclick = () => {
     axios
@@ -76,6 +77,7 @@ const LoginForm = () => {
       </Text>
     </LForm>
   );
+
 };
 
 export default LoginForm;
