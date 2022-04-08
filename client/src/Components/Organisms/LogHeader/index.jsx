@@ -7,31 +7,35 @@ import {
 } from "../../../../node_modules/react-router-dom/index";
 
 const LogHeader = () => {
-  const id = useParams();
+  const param = useParams();
   const nav = useNavigate();
   const onclick = (e) => {
     nav(`/log/${e.currentTarget.id}/0`);
   };
 
+  let select = [false, false, false];
+
+  if (param.type === "all") {
+    select[0] = true;
+  } else if (param.type === "violence") {
+    select[1] = true;
+  } else if (param.type === "절도") {
+    select[2] = true;
+  }
+
   return (
     <Container>
-      <Icons id="all" onClick={onclick}>
-        <A id={id.type}>
-          <GiCctvCamera />
-          <Naming>전체</Naming>
-        </A>
+      <Icons id="all" select={select[0]} onClick={onclick}>
+        <GiCctvCamera />
+        <Naming>전체</Naming>
       </Icons>
-      <Icons id="violence" onClick={onclick}>
-        <B id={id.type}>
-          <MdPersonalInjury />
-          <Naming>폭력</Naming>
-        </B>
+      <Icons id="violence" select={select[1]} onClick={onclick}>
+        <MdPersonalInjury />
+        <Naming>폭력</Naming>
       </Icons>
-      <Icons id="절도" onClick={onclick}>
-        <C id={id.type}>
-          <MdDoNotTouch />
-          <Naming>절도</Naming>
-        </C>
+      <Icons id="절도" select={select[2]} onClick={onclick}>
+        <MdDoNotTouch />
+        <Naming>절도</Naming>
       </Icons>
     </Container>
   );
