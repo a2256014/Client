@@ -115,7 +115,7 @@ const LogTemplate = () => {
                   {show == log.capture_file.file_id && (
                     // <Img src={log.capture_file.file_path} />
                     <div>
-                      <Img src="/폭행.jpg" />
+                      <Img src={log.capture_file.file_path} />
                       <ToInfo>자세히보기</ToInfo>
                     </div>
                   )}
