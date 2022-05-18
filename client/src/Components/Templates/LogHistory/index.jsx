@@ -9,6 +9,7 @@ import {
 
 import {
   Contain,
+  Container,
   DataInfo,
   Img,
   ListGroup,
@@ -17,17 +18,20 @@ import {
   LogContainer,
   LogData,
   Next,
+  ShowContainer,
   ShowImg,
   ToInfo,
 } from "./style";
 import { LOG_GET_URL } from "../../../Common/Constant/index";
 import useGetData from "../../../Common/Hook/useGetData";
+import VideoForm from "../../Molecules/Video/index";
 
 const LogTemplate = () => {
   const param = useParams();
   const nav = useNavigate();
   const [filterData, setFilterData] = useState([]);
   const [show, setShow] = useState("");
+  const [videoShow, setVideoShow] = useState("");
 
   const data = useGetData(LOG_GET_URL(param.id));
 
@@ -35,7 +39,17 @@ const LogTemplate = () => {
     if (show == e.currentTarget.id) {
       setShow("");
     } else {
+      if (videoShow == e.currentTarget.id) setVideoShow("");
       setShow(e.currentTarget.id);
+    }
+  };
+
+  const videoClick = (e) => {
+    if (videoShow == e.currentTarget.id) {
+      setVideoShow("");
+    } else {
+      if (show == e.currentTarget.id) setShow("");
+      setVideoShow(e.currentTarget.id);
     }
   };
 
@@ -63,6 +77,10 @@ const LogTemplate = () => {
     return a;
   };
 
+  const upLoad = (e) => {
+    console.log(e.target.id);
+  };
+
   useEffect(() => {
     if (data.data === undefined) return;
     if (param.type === "all") {
@@ -79,53 +97,75 @@ const LogTemplate = () => {
   return (
     <>
       <LogHeader />
-      <LogContainer>
-        <ListGroup>
-          <ListName>
-            학급&nbsp;&nbsp; 종류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 시간
-          </ListName>
-          {filterData.map((log) => {
-            return (
-              <>
-                <ListItem>
-                  <LogData>
-                    <DataInfo>
-                      {`${log.classroom}반`}&nbsp;&nbsp;&nbsp;&nbsp;
-                      {log.emergency_type.type_name_kor}
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {log.capture_file.created_date.replace("T", " ")}
-                    </DataInfo>
-                    {show == log.capture_file.file_id ? (
-                      <>
-                        <ShowImg
-                          id={log.capture_file.file_id}
-                          onClick={onclick}
-                        >
-                          사진 접기
-                          <BiArrowFromBottom />
-                        </ShowImg>
-                      </>
-                    ) : (
-                      <ShowImg id={log.capture_file.file_id} onClick={onclick}>
-                        사진 보기
-                        <BiArrowToBottom />
-                      </ShowImg>
+      <Container>
+        <LogContainer>
+          <ListGroup>
+            <ListName>
+              학급&nbsp;&nbsp; 종류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 시간
+            </ListName>
+            {filterData.map((log) => {
+              return (
+                <>
+                  <ListItem>
+                    <LogData>
+                      <DataInfo>
+                        {`${log.classroom.classroom_id}반`}
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        {log.emergency_type.type_name_kor}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {log.capture_file.created_date.replace("T", " ")}
+                      </DataInfo>
+                      <ShowContainer>
+                        {videoShow == log.alert_log_id ? (
+                          <>
+                            <ShowImg id={log.alert_log_id} onClick={videoClick}>
+                              비디오 접기
+                              <BiArrowFromBottom />
+                            </ShowImg>
+                          </>
+                        ) : (
+                          <ShowImg id={log.alert_log_id} onClick={videoClick}>
+                            비디오 보기
+                            <BiArrowToBottom />
+                          </ShowImg>
+                        )}
+                        {show == log.alert_log_id ? (
+                          <>
+                            <ShowImg id={log.alert_log_id} onClick={onclick}>
+                              사진 접기
+                              <BiArrowFromBottom />
+                            </ShowImg>
+                          </>
+                        ) : (
+                          <ShowImg id={log.alert_log_id} onClick={onclick}>
+                            사진 보기
+                            <BiArrowToBottom />
+                          </ShowImg>
+                        )}
+                      </ShowContainer>
+                    </LogData>
+                    {show == log.alert_log_id && (
+                      <div>
+                        <Img src={log.capture_file.file_path} />
+                        <ToInfo id={log.alert_log_id} onClick={upLoad}>
+                          사진 다운로드
+                        </ToInfo>
+                      </div>
                     )}
-                  </LogData>
-                  {show == log.capture_file.file_id && (
-                    // <Img src={log.capture_file.file_path} />
-                    <div>
-                      <Img src={log.capture_file.file_path} />
-                      <ToInfo>자세히보기</ToInfo>
-                    </div>
-                  )}
-                </ListItem>
-              </>
-            );
-          })}
-          <Contain>{CountPage()}</Contain>
-        </ListGroup>
-      </LogContainer>
+                    {videoShow == log.alert_log_id && (
+                      <div>
+                        <VideoForm path={log.video_file.file_path} />
+                        <ToInfo id={log.alert_log_id} onClick={upLoad}></ToInfo>
+                      </div>
+                    )}
+                  </ListItem>
+                </>
+              );
+            })}
+            <Contain>{CountPage()}</Contain>
+          </ListGroup>
+        </LogContainer>
+      </Container>
     </>
   );
 };

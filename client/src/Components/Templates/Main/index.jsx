@@ -35,7 +35,7 @@ const MainTemplate = () => {
       <VideoContainer>
         {data === "" || <_Modal log={data} />}
         {new Array(8).fill(0).map(() => (
-          <VideoForm />
+          <VideoForm path="./캡스톤디자인 피드백영상.mov" />
         ))}
       </VideoContainer>
     </>
