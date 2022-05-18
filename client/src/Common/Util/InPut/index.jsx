@@ -1,6 +1,7 @@
 export const initialUser = {
   username: "",
   email: "",
+  phone_number: "",
   password: "",
   repassword: "",
 };
@@ -16,6 +17,11 @@ export const InPutReducer = (state, action) => {
       return {
         ...state,
         email: action.email,
+      };
+    case "phone_number":
+      return {
+        ...state,
+        phone_number: action.phone_number,
       };
     case "password":
       return {

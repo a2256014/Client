@@ -4,8 +4,8 @@ export const UpForm = styled.div`
   align-items: center;
   width: 450px;
   height: 100%;
-  max-height: 900px;
-  min-height: 530px;
+  max-height: 1000px;
+  min-height: 580px;
   margin: 150px auto;
   background-color: black;
   border-radius: 25px;

@@ -12,15 +12,16 @@ import { SIGNUP_POST_URL } from "../../../Common/Constant/index";
 const SignUpTemplate = () => {
   const [state, dispatch] = useReducer(InPutReducer, initialUser);
   const nav = useNavigate();
-  const reg =
+  const regEmail =
     /^[a-zA-z0-9]([-_.]?[a-zA-z0-9])*@[a-zA-z0-9]([-_.]?[a-zA-z0-9])*.[a-zA-z]{2,3}$/;
-
+  const regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
   const change = (e) => {
     const changeType = e.target.attributes[1].value;
     dispatch({
       type: changeType,
       username: e.target.value,
       email: e.target.value,
+      phone_number: e.target.value,
       password: e.target.value,
       repassword: e.target.value,
     });
@@ -28,7 +29,8 @@ const SignUpTemplate = () => {
 
   const isMatch = (state) => {
     if (
-      reg.test(state.email) &&
+      regEmail.test(state.email) &&
+      regPhone.test(state.phone_number) &&
       state.password === state.repassword &&
       state.password !== ""
     ) {
@@ -43,12 +45,14 @@ const SignUpTemplate = () => {
       ? axios
           .post(`${SIGNUP_POST_URL}`, {
             email: state.email,
+            phone_number: state.phone_number,
             username: state.username,
             password: state.password,
           })
           .then((response) => {
             alert(`email : ${response.data.email}
                   이름 : ${response.data.username}
+                  전화번호 : ${response.data.phone_number}
                   회원가입 성공!!`);
             nav("/");
           })
@@ -77,12 +81,21 @@ const SignUpTemplate = () => {
           onChange={change}
         />
         <Input
+          type="phonenum"
+          typeof="phone_number"
+          placeholder="전화번호(-없이)"
+          onChange={change}
+        />
+        {regPhone.test(state.phone_number) || state.phone_number === "" || (
+          <Dismatch>핸드폰 번호 형식이 아닙니다.</Dismatch>
+        )}
+        <Input
           type="id"
           typeof="email"
           placeholder="아이디(이메일)"
           onChange={change}
         />
-        {reg.test(state.email) || state.email === "" || (
+        {regEmail.test(state.email) || state.email === "" || (
           <Dismatch>이메일 형식이 아닙니다.</Dismatch>
         )}
         <Input

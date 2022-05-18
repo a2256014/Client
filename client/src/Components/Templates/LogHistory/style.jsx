@@ -1,12 +1,16 @@
 import styled from "styled-components";
-import { css } from "../../../../node_modules/styled-components/dist/styled-components.cjs";
+
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const LogContainer = styled.table`
   color: white;
   width: 80%;
   align-items: center;
   border: 1px solid;
-  margin-left: 85px;
 `;
 
 export const ListName = styled.div`
@@ -30,6 +34,7 @@ export const LogData = styled.div`
   color: gray;
   display: flex;
   padding: 5px;
+  justify-content: space-between;
   border-bottom: 2px solid;
 `;
 
@@ -40,32 +45,26 @@ export const DataInfo = styled.div`
   justify-content: space-between;
 `;
 
+export const ShowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const ShowImg = styled.button`
   color: white;
   cursor: pointer;
   font-size: 15px;
+  min-width: 100px;
 `;
 
 export const Img = styled.img`
-  max-width: 500px;
-  max-height: 500px;
-
+  /* max-width: 500px;
+  max-height: 500px; */
+  width: 100%;
+  height: 100%;
   position: relative;
   transition-duration: 1s;
   opacity: 5;
-
-  animation: my 1s;
-
-  @keyframes my {
-    0% {
-      width: 0%;
-      height: 60%;
-    }
-    100% {
-      width: 60%;
-      height: 60%;
-    }
-  }
 `;
 
 export const Next = styled.a`
