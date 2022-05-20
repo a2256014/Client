@@ -21,7 +21,6 @@ const useGetData = (address) => {
           console.log("잘못된 id로 요청");
         }
       });
-    console.log(response.data);
     setData(response.data);
   };
 
