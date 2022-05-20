@@ -36,19 +36,20 @@ const LogTemplate = () => {
   const data = useGetData(LOG_GET_URL(param.id));
 
   const onclick = (e) => {
-    if (show == e.currentTarget.id) {
+    console.log(e.currentTarget.id === show);
+    if (show === e.currentTarget.id) {
       setShow("");
     } else {
-      if (videoShow == e.currentTarget.id) setVideoShow("");
+      if (videoShow === e.currentTarget.id) setVideoShow("");
       setShow(e.currentTarget.id);
     }
   };
 
   const videoClick = (e) => {
-    if (videoShow == e.currentTarget.id) {
+    if (videoShow === e.currentTarget.id) {
       setVideoShow("");
     } else {
-      if (show == e.currentTarget.id) setShow("");
+      if (show === e.currentTarget.id) setShow("");
       setVideoShow(e.currentTarget.id);
     }
   };
@@ -60,7 +61,7 @@ const LogTemplate = () => {
   const CountPage = () => {
     let a = [];
     for (let i = 0; i < data.last_page + 1; i++) {
-      if (param.id == i) {
+      if (param.id === i + "") {
         a.push(
           <Next id={i} select="true" onClick={onclick2}>
             {i + 1}
@@ -75,10 +76,6 @@ const LogTemplate = () => {
       }
     }
     return a;
-  };
-
-  const upLoad = (e) => {
-    console.log(e.target.id);
   };
 
   useEffect(() => {
@@ -116,7 +113,7 @@ const LogTemplate = () => {
                         {log.capture_file.created_date.replace("T", " ")}
                       </DataInfo>
                       <ShowContainer>
-                        {videoShow == log.alert_log_id ? (
+                        {videoShow === log.alert_log_id + "" ? (
                           <>
                             <ShowImg id={log.alert_log_id} onClick={videoClick}>
                               비디오 접기
@@ -129,7 +126,7 @@ const LogTemplate = () => {
                             <BiArrowToBottom />
                           </ShowImg>
                         )}
-                        {show == log.alert_log_id ? (
+                        {show === log.alert_log_id + "" ? (
                           <>
                             <ShowImg id={log.alert_log_id} onClick={onclick}>
                               사진 접기
@@ -144,18 +141,16 @@ const LogTemplate = () => {
                         )}
                       </ShowContainer>
                     </LogData>
-                    {show == log.alert_log_id && (
+                    {show === log.alert_log_id + "" && (
                       <div>
                         <Img src={log.capture_file.file_path} />
-                        <ToInfo id={log.alert_log_id} onClick={upLoad}>
-                          사진 다운로드
-                        </ToInfo>
+                        <ToInfo id={log.alert_log_id}>사진 다운로드</ToInfo>
                       </div>
                     )}
-                    {videoShow == log.alert_log_id && (
+                    {videoShow === log.alert_log_id + "" && (
                       <div>
                         <VideoForm path={log.video_file.file_path} />
-                        <ToInfo id={log.alert_log_id} onClick={upLoad}></ToInfo>
+                        <ToInfo id={log.alert_log_id}></ToInfo>
                       </div>
                     )}
                   </ListItem>
