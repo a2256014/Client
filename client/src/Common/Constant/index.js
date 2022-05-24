@@ -21,3 +21,6 @@ export const LOG_GET_URL_BASIC = process.env.REACT_APP_LOG_GET_URL;
 
 export const LOG_GET_URL = (id) =>
   `${SERVER_URL}${BASIC_API_URL}${ALERT_GET_URL_BASIC}${LOG_GET_URL_BASIC}${id}`;
+
+
+export const IMAGE_STREAM_URL = process.env.REACT_APP_STREAM_IMAGE_URL;
