@@ -11,3 +11,18 @@ export const ImgStyle = styled.img`
   border: 0px solid black;
   margin-right: 1em;
 `;
+
+export const InfoContainer = styled.div`
+  display: flex;
+  height: 20px;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  background-color: red;
+  border-radius: 3px;
+  align-items: center;
+`;
+
+export const Info = styled.div`
+  display: flex;
+`;

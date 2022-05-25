@@ -9,6 +9,7 @@ export const Container = styled.div`
 export const LogContainer = styled.table`
   color: white;
   width: 80%;
+  min-width: 800px;
   align-items: center;
   border: 1px solid;
 `;
@@ -43,6 +44,7 @@ export const DataInfo = styled.div`
   min-inline-size: 605px;
   flex-direction: row;
   justify-content: space-between;
+  color: aliceblue;
 `;
 
 export const ShowContainer = styled.div`
@@ -82,6 +84,6 @@ export const Contain = styled.div`
   flex-direction: row;
 `;
 
-export const ToInfo = styled.button`
+export const ToInfo = styled.a`
   color: aliceblue;
 `;

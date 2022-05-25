@@ -1,5 +1,4 @@
 import * as AiIcons from "react-icons/ai";
-import { useState } from "react";
 import {
   ModalButton,
   ModalContainer,
@@ -10,20 +9,30 @@ import {
 } from "./Style";
 import { useNavigate } from "../../../../node_modules/react-router-dom/index";
 
-const _Modal = ({ log }) => {
+const Modal = ({
+  log,
+  socketId,
+  setSocketId,
+  alarmData,
+  setAlarmData,
+  modalMode,
+  setmodalMode,
+}) => {
   const {
     capture_file: { created_date: time, file_id: id },
     emergency_type: { type_name_kor: actionType },
   } = log;
   const nav = useNavigate();
-  const [modalMode, setmodalMode] = useState(true);
   const ModalClose = () => {
     setmodalMode(false);
+    setAlarmData([...alarmData, socketId]);
+    setSocketId(-1);
   };
 
   const ReadMore = () => {
     nav(`/info/${id}`, { state: { log } });
     setmodalMode(false);
+    setSocketId(-1);
   };
 
   return (
@@ -43,4 +52,4 @@ const _Modal = ({ log }) => {
   );
 };
 
-export default _Modal;
+export default Modal;
