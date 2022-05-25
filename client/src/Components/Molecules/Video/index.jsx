@@ -2,36 +2,30 @@ import { useEffect, useRef } from "react";
 import { Container } from "./Style";
 
 const VideoForm = ({ path }) => {
-  const canvasRef = useRef(null);
+  // const canvasRef = useRef(null);
   const containerRef = useRef(null);
 
   useEffect(() => {
-    if (!canvasRef || !containerRef) return;
-
-    const canvas = canvasRef.current;
-    // canvas.width = containerRef.current.clientWidth;
-    // canvas.height = containerRef.current.clientHeight;
-    // console.log(containerRef.current.clientHeight);
-    const context = canvas.getContext("2d");
+    if (!containerRef) return;
 
     const timer = setInterval(() => {
       const image = new Image();
-      image.src = path;
+      image.className = "img";
+      image.src = path + `?${performance.now()}`;
       image.onload = () => {
-        context.drawImage(image, 0, 0);
+        if (!containerRef.current) return;
+        const $img = containerRef.current.querySelector(".img");
+        if ($img) containerRef.current.removeChild($img);
+        containerRef.current.appendChild(image);
       };
-    }, 30);
+    }, 50);
 
     return () => {
       clearInterval(timer);
     };
-  }, [canvasRef]);
+  }, [path]);
 
-  return (
-    <Container ref={containerRef}>
-      <canvas className="canvas" ref={canvasRef} />
-    </Container>
-  );
+  return <Container ref={containerRef}></Container>;
 };
 
 export default VideoForm;

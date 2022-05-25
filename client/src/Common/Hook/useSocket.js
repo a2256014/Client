@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 
-let setSocketId;
-let setImagePath;
-let curSocketId;
-let setPrevSocketId;
+let setSocketId = 0;
+let setImagePath = 0;
+let curSocketId = 0;
+let setPrevSocketId = 0;
 const openEvnet = () => {
-  console.log("connnected");
+  if (setImagePath === 0) console.log("id Socket connected");
+  else console.log("img Socket connected");
 };
 
 const useOnMessageEvent = (evt) => {

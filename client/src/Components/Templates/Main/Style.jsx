@@ -1,16 +1,13 @@
 import styled from "styled-components";
 
 export const VideoContainer = styled.div`
-  padding-left: 50px;
-  padding-right: 50px;
-  width: 100%;
+  width: 1000px;
   max-height: 800px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: auto;
   @media screen {
     height: 100vh;
-    display: 80vh;
+    width: 100vw;
   }
 `;

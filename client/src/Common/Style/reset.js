@@ -1,9 +1,7 @@
-import {
-  createGlobalStyle
-} from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset"; // style-reset 패키지
 
-const GlobalStyles = createGlobalStyle ` 
+const GlobalStyles = createGlobalStyle` 
     ${reset}
     a{
         text-decoration: none;
@@ -31,8 +29,16 @@ const GlobalStyles = createGlobalStyle `
 
     .canvas {
       margin:auto;
-      width:80%;
-      height:80%;
+      width:1600px;
+      height:1028px;
+    }
+
+    .img {
+      width:100%;
+      height:100%;
+      max-width:100%;
+      max-height:100%;
+      
     }
 `;
 

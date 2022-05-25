@@ -8,7 +8,6 @@ const MainPage = ({
   modalMode,
   setmodalMode,
   prevSocketId,
-  imgPath,
 }) => {
   return (
     <MainTemplate
@@ -19,7 +18,6 @@ const MainPage = ({
       modalMode={modalMode}
       setmodalMode={setmodalMode}
       prevSocketId={prevSocketId}
-      imgPath={imgPath}
     />
   );
 };

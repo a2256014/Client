@@ -10,18 +10,13 @@ import SignUpPage from "./Components/Pages/SignUpPage.jsx";
 import LogPage from "./Components/Pages/LogPage.jsx";
 import { useEffect, useState } from "react";
 import { useSocket } from "./Common/Hook/useSocket.js";
-import {
-  DANGER_SOCKET_SERVER_URL,
-  IMAGE_SOCKET_SERVER_URL,
-} from "./Common/Constant/index.js";
+import { DANGER_SOCKET_SERVER_URL } from "./Common/Constant/index.js";
 
 const App = () => {
   const location = useLocation().pathname;
   const [, setDangerSocket] = useState();
-  const [, setImageSocket] = useState();
   const [modalMode, setmodalMode] = useState(false);
   const [alarmData, setAlarmData] = useState([]);
-  const [imgPath, setImgPath] = useState("");
   const [socketId, setSocketId] = useState(-1);
   const [prevSocketId, setPrevSocketId] = useState(-1);
 
@@ -34,18 +29,12 @@ const App = () => {
     DANGER_SOCKET_SERVER_URL
   );
 
-  useSocket(setImageSocket, 0, 0, 0, setImgPath, IMAGE_SOCKET_SERVER_URL);
-
   useEffect(() => {
     if (location !== "/home" && socketId !== -1) {
       setAlarmData([...alarmData, socketId]);
       setSocketId(-1);
     }
   }, [socketId]);
-
-  useEffect(() => {
-    console.log(imgPath);
-  }, [imgPath]);
   return (
     <>
       <Header alarmData={alarmData} setAlarmData={setAlarmData} />
@@ -74,7 +63,6 @@ const App = () => {
                   modalMode={modalMode}
                   setmodalMode={setmodalMode}
                   prevSocketId={prevSocketId}
-                  imgPath={imgPath}
                 />
               }
             />

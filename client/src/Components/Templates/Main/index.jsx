@@ -4,6 +4,7 @@ import {
   ALERT_GET_URL,
   SOCKET_SERVER_URL,
   IMAGE_STREAM_URL,
+  IMAGE_SOCKET_SERVER_URL,
 } from "../../../Common/Constant/index";
 
 import VideoForm from "../../Molecules/Video";
@@ -11,7 +12,6 @@ import Modal from "../../Molecules/Modal/index";
 
 import { VideoContainer } from "./Style";
 import useGetData from "../../../Common/Hook/useGetData";
-import { useEffect } from "react";
 
 const MainTemplate = ({
   socketId,
@@ -21,8 +21,10 @@ const MainTemplate = ({
   modalMode,
   setmodalMode,
   prevSocketId,
-  imgPath,
 }) => {
+  const [, setImageSocket] = useState();
+  const [imgPath, setImgPath] = useState("");
+  useSocket(setImageSocket, 0, 0, 0, setImgPath, IMAGE_SOCKET_SERVER_URL);
   const data = useGetData(ALERT_GET_URL(socketId));
   useEffect(() => {
     if (socketId !== -1 && !modalMode) {
@@ -38,10 +40,19 @@ const MainTemplate = ({
   return (
     <>
       <VideoContainer>
-        {data === "" || <_Modal log={data} />}
-        {new Array(8).fill(0).map(() => (
-          <VideoForm path={imgPath} />
-        ))}
+        {data === "" || (
+          <Modal
+            log={data}
+            socketId={socketId}
+            setSocketId={setSocketId}
+            alarmData={alarmData}
+            setAlarmData={setAlarmData}
+            modalMode={modalMode}
+            setmodalMode={setmodalMode}
+          />
+        )}
+        <VideoForm path={imgPath} />
+        {/* <img className="aaaa" src={imgPath} /> */}
       </VideoContainer>
     </>
   );
