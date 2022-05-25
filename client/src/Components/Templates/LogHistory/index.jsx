@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { BiArrowToBottom, BiArrowFromBottom } from "react-icons/bi";
-
 import LogHeader from "../../Organisms/LogHeader/index";
 import {
   useNavigate,
@@ -32,11 +31,9 @@ const LogTemplate = () => {
   const [filterData, setFilterData] = useState([]);
   const [show, setShow] = useState("");
   const [videoShow, setVideoShow] = useState("");
-
   const data = useGetData(LOG_GET_URL(param.id));
 
   const onclick = (e) => {
-    console.log(e.currentTarget.id === show);
     if (show === e.currentTarget.id) {
       setShow("");
     } else {
@@ -60,7 +57,7 @@ const LogTemplate = () => {
 
   const CountPage = () => {
     let a = [];
-    for (let i = 0; i < data.last_page + 1; i++) {
+    for (let i = 0; i < data.last_page; i++) {
       if (param.id === i + "") {
         a.push(
           <Next id={i} select="true" onClick={onclick2}>
@@ -98,14 +95,18 @@ const LogTemplate = () => {
         <LogContainer>
           <ListGroup>
             <ListName>
-              학급&nbsp;&nbsp; 종류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 시간
+              학급&nbsp;&nbsp;
+              종류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              시간
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              파일
             </ListName>
             {filterData.map((log) => {
               return (
                 <>
                   <ListItem>
                     <LogData>
-                      <DataInfo>
+                      <DataInfo id={log.alert_log_id}>
                         {`${log.classroom.classroom_id}반`}
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         {log.emergency_type.type_name_kor}
@@ -144,7 +145,6 @@ const LogTemplate = () => {
                     {show === log.alert_log_id + "" && (
                       <div>
                         <Img src={log.capture_file.file_path} />
-                        <ToInfo id={log.alert_log_id}>사진 다운로드</ToInfo>
                       </div>
                     )}
                     {videoShow === log.alert_log_id + "" && (

@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  position: relative;
+`;
+
 export const Nav = styled.div`
   margin-left: 50px;
 `;
 
 export const DropMenu = styled.ul`
   display: flex;
+  position: absolute;
   flex-direction: column;
-  position: fixed;
-  top: 75px;
+  top: 60px;
   left: 10px;
   width: 100px;
   z-index: 3;

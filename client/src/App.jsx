@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import LoginPage from "./Components/Pages/LoginPage.jsx";
 import MainPage from "./Components/Pages/MainPage.jsx";
@@ -7,13 +7,48 @@ import Header from "./Components/Organisms/Header/index.jsx";
 import PublicRoute from "./Routes/PublicRoute/index.jsx";
 import PrivateRoute from "./Routes/PrivateRoute/index.jsx";
 import SignUpPage from "./Components/Pages/SignUpPage.jsx";
-import MyPage from "./Components/Pages/MyPage.jsx";
 import LogPage from "./Components/Pages/LogPage.jsx";
+import { useEffect, useState } from "react";
+import { useSocket } from "./Common/Hook/useSocket.js";
+import {
+  DANGER_SOCKET_SERVER_URL,
+  IMAGE_SOCKET_SERVER_URL,
+} from "./Common/Constant/index.js";
 
 const App = () => {
+  const location = useLocation().pathname;
+  const [, setDangerSocket] = useState();
+  const [, setImageSocket] = useState();
+  const [modalMode, setmodalMode] = useState(false);
+  const [alarmData, setAlarmData] = useState([]);
+  const [imgPath, setImgPath] = useState("");
+  const [socketId, setSocketId] = useState(-1);
+  const [prevSocketId, setPrevSocketId] = useState(-1);
+
+  useSocket(
+    setDangerSocket,
+    socketId,
+    setSocketId,
+    setPrevSocketId,
+    0,
+    DANGER_SOCKET_SERVER_URL
+  );
+
+  useSocket(setImageSocket, 0, 0, 0, setImgPath, IMAGE_SOCKET_SERVER_URL);
+
+  useEffect(() => {
+    if (location !== "/home" && socketId !== -1) {
+      setAlarmData([...alarmData, socketId]);
+      setSocketId(-1);
+    }
+  }, [socketId]);
+
+  useEffect(() => {
+    console.log(imgPath);
+  }, [imgPath]);
   return (
     <>
-      <Header />
+      <Header alarmData={alarmData} setAlarmData={setAlarmData} />
       <Routes>
         <Route
           restricted={false}
@@ -28,7 +63,22 @@ const App = () => {
         <Route
           restricted={false}
           path="/home"
-          element={<PrivateRoute component={<MainPage />} />} //영상보여주는 페이지
+          element={
+            <PrivateRoute
+              component={
+                <MainPage
+                  socketId={socketId}
+                  setSocketId={setSocketId}
+                  alarmData={alarmData}
+                  setAlarmData={setAlarmData}
+                  modalMode={modalMode}
+                  setmodalMode={setmodalMode}
+                  prevSocketId={prevSocketId}
+                  imgPath={imgPath}
+                />
+              }
+            />
+          } //영상보여주는 페이지
         />
         <Route
           restricted={false}
@@ -39,11 +89,6 @@ const App = () => {
           restricted={false}
           path="/log/:type/:id"
           element={<PrivateRoute component={<LogPage />} />} //위험행동 감지 페이지
-        />
-        <Route
-          restricted={false}
-          path="/mypage"
-          element={<PrivateRoute component={<MyPage />} />} //로그인 페이지
         />
       </Routes>
     </>

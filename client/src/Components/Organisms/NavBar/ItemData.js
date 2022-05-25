@@ -18,25 +18,11 @@ export const ItemData = [
     isLogin: true,
   },
   {
-    title: "Info",
-    path: "/Info/100",
-    icon: <BsIcons.BsFillInfoCircleFill />,
-    cName: "nav-text",
-    isLogin: true,
-  },
-  {
     title: "Login",
     path: "/",
     icon: <RiIcons.RiLoginBoxLine />,
     cName: "nav-text",
     isLogin: false,
-  },
-  {
-    title: "MyPage",
-    path: "/mypage",
-    icon: <BsIcons.BsPersonSquare />,
-    cName: "nav-text",
-    isLogin: true,
   },
   {
     title: "Logout",

@@ -1,44 +1,50 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { sendMessage, useSocket } from "../../../Common/Hook/useSocket";
-import {
-  ALERT_GET_URL,
-  SOCKET_SERVER_URL,
-} from "../../../Common/Constant/index";
+import { ALERT_GET_URL } from "../../../Common/Constant/index";
 
 import VideoForm from "../../Molecules/Video";
-import _Modal from "../../Molecules/Modal/index";
+import Modal from "../../Molecules/Modal/index";
 
 import { VideoContainer } from "./Style";
-import GetData from "../../../Common/Util/GetData/index";
-import axios from "../../../../node_modules/axios/index";
-import { AutoHeader } from "../../../Common/Util/AutoHeader/index";
 import useGetData from "../../../Common/Hook/useGetData";
-import useAsync from "../../../Common/Hook/useAsync";
+import { useEffect } from "react";
 
-const MainTemplate = () => {
-  const [socket, setSocket] = useState();
-  const [id, setId] = useState(-1);
-
-  useSocket(setSocket, setId, SOCKET_SERVER_URL);
+const MainTemplate = ({
+  socketId,
+  setSocketId,
+  alarmData,
+  setAlarmData,
+  modalMode,
+  setmodalMode,
+  prevSocketId,
+  imgPath,
+}) => {
+  const data = useGetData(ALERT_GET_URL(socketId));
+  useEffect(() => {
+    if (socketId !== -1 && !modalMode) {
+      setmodalMode(true);
+    } else if (socketId !== -1 && modalMode && prevSocketId !== -1) {
+      setAlarmData([...alarmData, prevSocketId]);
+    }
+  }, [socketId]);
 
   useEffect(() => {
-    socket === undefined || socket.readyState === 0
-      ? console.log("loading")
-      : sendMessage(socket, "hi");
-  });
-
-  const data = useGetData(ALERT_GET_URL(id));
-
+    console.log("mainpage img path : ", imgPath);
+  }, [imgPath]);
   return (
-    <>
-      <VideoContainer>
-        {data === "" || <_Modal log={data} />}
-        {new Array(8).fill(0).map(() => (
-          <VideoForm path="./캡스톤디자인 피드백영상.mov" />
-        ))}
-      </VideoContainer>
-    </>
+    <VideoContainer>
+      {data ? (
+        <Modal
+          log={data}
+          socketId={socketId}
+          setSocketId={setSocketId}
+          alarmData={alarmData}
+          setAlarmData={setAlarmData}
+          modalMode={modalMode}
+          setmodalMode={setmodalMode}
+        />
+      ) : null}
+      <img src={imgPath} alt="d" />
+      <VideoForm path="./캡스톤디자인 피드백영상.mov" />
+    </VideoContainer>
   );
 };
 

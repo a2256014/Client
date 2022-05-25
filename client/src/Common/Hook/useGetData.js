@@ -5,8 +5,9 @@ import { AutoHeader } from "../Util/AutoHeader/index";
 
 const useGetData = (address) => {
   const [data, setData] = useState("");
-
+  const [, , , , , , uri] = address.split("/");
   useEffect(() => {
+    if (uri === "undefined") return;
     if (address.substr(-2) === "-1") return;
     Getdata(address);
   }, [address]);
@@ -17,7 +18,7 @@ const useGetData = (address) => {
         headers: AutoHeader(),
       })
       .catch((error) => {
-        if (error.response.status === 500) {
+        if (error.response.status === 500 || error.response.status === 400) {
           console.log("잘못된 id로 요청");
         }
       });

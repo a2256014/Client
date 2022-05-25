@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "../../../../node_modules/react-router-dom/index";
-import { DropList, DropMenu, Item, MenuButton } from "./style";
+import { Container, DropList, DropMenu, Item, MenuButton } from "./style";
 import { ItemData } from "./ItemData";
 import IsLogin from "../../../Common/Util/IsLogin/index";
 import Logout from "../../../Common/Util/Logout/index";
@@ -30,7 +30,7 @@ const NavBar = () => {
   return (
     <>
       {show ? (
-        <>
+        <Container>
           <MenuButton>
             <AiIcons.AiOutlineClose onClick={showMenu} />
           </MenuButton>
@@ -62,7 +62,7 @@ const NavBar = () => {
               );
             })}
           </DropMenu>
-        </>
+        </Container>
       ) : (
         <MenuButton>
           <FaIcons.FaBars onClick={showMenu} />
