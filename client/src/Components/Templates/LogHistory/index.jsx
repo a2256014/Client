@@ -1,26 +1,9 @@
 import { useEffect, useState } from "react";
 import { BiArrowToBottom, BiArrowFromBottom } from "react-icons/bi";
 import LogHeader from "../../Organisms/LogHeader/index";
-import {
-  useNavigate,
-  useParams,
-} from "../../../../node_modules/react-router-dom/index";
+import { useNavigate, useParams } from "../../../../node_modules/react-router-dom/index";
 
-import {
-  Contain,
-  Container,
-  DataInfo,
-  Img,
-  ListGroup,
-  ListItem,
-  ListName,
-  LogContainer,
-  LogData,
-  Next,
-  ShowContainer,
-  ShowImg,
-  ToInfo,
-} from "./style";
+import { Contain, Container, DataInfo, Img, ListGroup, ListItem, ListName, LogContainer, LogData, Next, ShowContainer, ShowImg, ToInfo } from "./style";
 import { LOG_GET_URL } from "../../../Common/Constant/index";
 import useGetData from "../../../Common/Hook/useGetData";
 import VideoForm from "../../Molecules/Video/index";
@@ -78,13 +61,9 @@ const LogTemplate = () => {
   useEffect(() => {
     if (data.data === undefined) return;
     if (param.type === "all") {
-      setFilterData(data.data);
+      setFilterData(data.data.filter((data) => data.capture_file));
     } else {
-      setFilterData(
-        data.data.filter(
-          (data) => data.emergency_type.type_name_eng === param.type
-        )
-      );
+      setFilterData(data.data.filter((data) => (data.emergency_type.type_name_eng === param.type || data.emergency_type.type_name_kor === param.type) && data.capture_file));
     }
   }, [param, data]);
 
@@ -95,9 +74,7 @@ const LogTemplate = () => {
         <LogContainer>
           <ListGroup>
             <ListName>
-              학급&nbsp;&nbsp;
-              종류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              시간
+              학급&nbsp;&nbsp; 종류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 시간
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               파일
             </ListName>
