@@ -154,11 +154,8 @@ const LogTemplate = () => {
                     {videoShow === log.alert_log_id + "" && (
                       <div>
                         <VideoContainer>
-                          <video autoplay="" muted="">
-                            <source
-                              src={log.video_file.file_path}
-                              type="video/mp4"
-                            />
+                          <video muted autoPlay width="815px" height="460px">
+                            <source src={log.video_file.file_path} />
                           </video>
                         </VideoContainer>
                         <ToInfo id={log.alert_log_id}></ToInfo>
