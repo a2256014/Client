@@ -24,7 +24,6 @@ import {
 } from "./style";
 import { LOG_GET_URL } from "../../../Common/Constant/index";
 import useGetData from "../../../Common/Hook/useGetData";
-import VideoForm from "../../Molecules/Video/index";
 
 const LogTemplate = () => {
   const param = useParams();
@@ -90,6 +89,7 @@ const LogTemplate = () => {
         )
       );
     }
+    console.log(data.data);
   }, [param, data]);
 
   return (
@@ -156,7 +156,8 @@ const LogTemplate = () => {
                         <VideoContainer>
                           <video
                             src={log.video_file.file_path}
-                            autoplay="true"
+                            autoplay
+                            muted
                           />
                         </VideoContainer>
                         <ToInfo id={log.alert_log_id}></ToInfo>
