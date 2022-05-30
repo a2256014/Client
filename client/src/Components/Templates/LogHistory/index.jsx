@@ -20,6 +20,7 @@ import {
   ShowContainer,
   ShowImg,
   ToInfo,
+  VideoContainer,
 } from "./style";
 import { LOG_GET_URL } from "../../../Common/Constant/index";
 import useGetData from "../../../Common/Hook/useGetData";
@@ -152,7 +153,12 @@ const LogTemplate = () => {
                     )}
                     {videoShow === log.alert_log_id + "" && (
                       <div>
-                        <VideoForm path={log.video_file.file_path} />
+                        <VideoContainer>
+                          <video
+                            src={log.video_file.file_path}
+                            autoplay="true"
+                          />
+                        </VideoContainer>
                         <ToInfo id={log.alert_log_id}></ToInfo>
                       </div>
                     )}
