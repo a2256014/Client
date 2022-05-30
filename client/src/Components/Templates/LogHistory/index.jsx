@@ -89,7 +89,7 @@ const LogTemplate = () => {
         )
       );
     }
-    console.log(data.data);
+    console.log("log data : ", data.data);
   }, [param, data]);
 
   return (
