@@ -87,3 +87,9 @@ export const Contain = styled.div`
 export const ToInfo = styled.a`
   color: aliceblue;
 `;
+
+export const VideoContainer = styled.div`
+  display: flex;
+  width: 90%;
+  height: 90%;
+`;
