@@ -154,7 +154,7 @@ const LogTemplate = () => {
                     {videoShow === log.alert_log_id + "" && (
                       <div>
                         <VideoContainer>
-                          <video muted autoPlay width="815px" height="460px">
+                          <video muted autoPlay width="100%" height="100%">
                             <source src={log.video_file.file_path} />
                           </video>
                         </VideoContainer>
