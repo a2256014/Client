@@ -25,20 +25,29 @@ export const ModalStyle = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  padding: 20px;
+  padding: 15px;
   border-radius: 10px;
 `;
 
 export const ModalButton = styled.button`
-  position: fixed;
-  top: 75%;
-  left: 45%;
-  width: 50px;
-  height: 35px;
+  display: flex;
+  margin-top: 25px;
+  margin-left: 115px;
+  min-height: 30px;
+  align-items: center;
+
+  margin-bottom: 5px;
   border-radius: 5px;
   background-color: ${RedColor};
   color: white;
   opacity: 0.9;
+  &:hover {
+    opacity: 1;
+    ${HoverPointer};
+  }
+`;
+export const Out = styled.button`
+  padding: 0px;
   &:hover {
     opacity: 1;
     ${HoverPointer};
@@ -49,11 +58,13 @@ export const Title = styled.p`
   font-size: ${TitleFontSize};
   /* align-content: center; */
   text-align: center;
+  margin-bottom: 30px;
   color: ${RedColor};
 `;
 
 export const Text = styled.p`
-  margin-top: 20px;
-  margin-left: 10px;
+  margin-top: 15px;
+  margin-left: 20px;
+
   color: black;
 `;

@@ -1,45 +1,83 @@
-import { useState } from "react";
-import { Button, Container, Input } from "./Style";
+import { useReducer, useState } from "react";
+import { LForm, Signup, Text } from "./Style";
+import { Button, ButtonGroup } from "../../Atoms/Button/style";
+import { Input, InputGroup } from "../../Atoms/Input/style";
+import { HeaderTitle } from "../../Atoms/HeaderIcon/style";
+import { BiCctv } from "react-icons/bi";
 import * as axios from "axios";
+import { useNavigate } from "../../../../node_modules/react-router-dom/index";
+import onLoginSuccess from "../../../Common/Util/LoginSuccess/index";
+import { initialUser, InPutReducer } from "../../../Common/Util/InPut/index";
+import { SIGNIN_POST_URL } from "../../../Common/Constant/index";
 
 const LoginForm = () => {
-    const [login, setlogin] = useState({
-        id: "",
-        password: ''
-    })
-    const changeId = (e) => {
-        setlogin(prev => ({ ...prev, id: e.target.value }))
-        console.log(login)
+	const [state, dispatch] = useReducer(InPutReducer, initialUser);
+
+	const change = (e) => {
+		const changeType = e.target.attributes[1].value;
+		dispatch({
+			type: changeType,
+			email: e.target.value,
+			password: e.target.value,
+			repassword: e.target.value,
+		});
+	};
+
+	const nav = useNavigate();
+
+
+  const onclick = () => {
+    axios
+      .post(`${SIGNIN_POST_URL}`, {
+        email: state.email,
+        password: state.password,
+      })
+      .then((response) => {
+        onLoginSuccess(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const onKeyPress = (e) => {
+    if (e.key == "Enter") {
+      onclick();
     }
-    const changePassword = (e) => {
-        setlogin(prev => ({ ...prev, password: e.target.value }))
-        console.log(login)
-    }
-    const onclick = async () => {
-        // const a = await axios.post('/test.json',  login );
-        const { data: { users } } = await axios.get('/test.json');
-        const { id, password, name } = users[0];
-        if (id === login.id && password === login.password) {
-            console.log("로그인 성공", name);
-        }
-        else {
-            console.log("실패");
-        }
-    }
-    return (
-        <Container>
-            <Input
-                placeholder="아이디를 입력해주세요"
-                onChange={changeId}
-            />
-            <Input
-                type="password"
-                placeholder="비밀번호를 입력해주세요"
-                onChange={changePassword}
-            />
-            <Button onClick={onclick}>로그인</Button>
-        </Container>
-    );
-}
+  };
+
+  const onclick2 = () => {
+    nav("/sign-up");
+  };
+
+  return (
+    <LForm>
+      <HeaderTitle>
+        <BiCctv />
+      </HeaderTitle>
+      <InputGroup onKeyPress={onKeyPress}>
+        <Input
+          type="id"
+          typeof="email"
+          placeholder="아이디"
+          onChange={change}
+        />
+        <Input
+          type="password"
+          typeof="password"
+          placeholder="비밀번호"
+          onChange={change}
+        />
+      </InputGroup>
+      <ButtonGroup>
+        <Button onClick={onclick}>로그인</Button>
+      </ButtonGroup>
+      <Text>
+        Stop!이 처음이신가요? <Signup onClick={onclick2}>회원가입하기</Signup>
+      </Text>
+    </LForm>
+  );
+
+};
 
 export default LoginForm;

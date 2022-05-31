@@ -26,6 +26,20 @@ const GlobalStyles = createGlobalStyle`
       color: inherit;
       text-decoration: none;
     }
+
+    .canvas {
+      margin:auto;
+      width:1600px;
+      height:1028px;
+    }
+
+    .img {
+      width:100%;
+      height:100%;
+      max-width:100%;
+      max-height:100%;
+      
+    }
 `;
 
 export default GlobalStyles;

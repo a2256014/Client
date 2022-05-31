@@ -1,34 +1,67 @@
 import { useEffect } from "react";
-
-let _setId;
+import { AutoHeader } from "../Util/AutoHeader/index";
+const token = localStorage.getItem("accessToken");
+let setSocketId = 0;
+let setImagePath = 0;
+let curSocketId = 0;
+let setPrevSocketId = 0;
 const openEvnet = () => {
-  console.log("connnected");
+  if (setImagePath === 0) console.log("id Socket connected");
+  else console.log("img Socket connected");
 };
 
 const useOnMessageEvent = (evt) => {
-  const { data: id } = evt;
-  _setId(id);
+  const { data: message } = evt;
+  if (message / 1) {
+    setPrevSocketId(curSocketId);
+    setSocketId(message);
+  } else {
+    setImagePath(message);
+  }
 };
 
 const errorEvent = (err) => {
   console.log(err);
 };
-const socketInit = (socket, setId) => {
+
+const socketInit = (socket, url, setSocket) => {
   socket.onopen = openEvnet;
   socket.onmessage = useOnMessageEvent;
   socket.onerror = errorEvent;
+  socket.onclose = () => {
+    init(socket, url, setSocket);
+  };
 };
 
-export const useSocket = (setSocket, setId, url) => {
+export const useSocket = (
+  setSocket,
+  curId,
+  setId,
+  setPrevId,
+  setImgPath,
+  url
+) => {
   let socket;
-  _setId = setId;
+  if (setId) {
+    setSocketId = setId;
+    curSocketId = curId;
+    setPrevSocketId = setPrevId;
+  }
+  if (setImgPath) setImagePath = setImgPath;
   useEffect(() => {
-    socket = new WebSocket(url);
-    socketInit(socket);
-    setSocket(socket);
+    init(socket, url, setSocket);
   }, []);
 };
 
+const init = (socket, url, setSocket) => {
+  socket = new WebSocket(url);
+  socketInit(socket, url, setSocket);
+  setSocket(socket);
+};
+
 export const sendMessage = (socket, msg) => {
-  socket.send(msg);
+  if (socket.readyState === 1) {
+    socket.send(msg);
+    console.log(`sendMessage : ${msg}`);
+  }
 };

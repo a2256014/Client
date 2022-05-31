@@ -1,15 +1,19 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  position: relative;
+`;
+
 export const Nav = styled.div`
   margin-left: 50px;
 `;
 
 export const DropMenu = styled.ul`
   display: flex;
-  flex-direction: column;
   position: absolute;
-  top: 75px;
-  right: 10px;
+  flex-direction: column;
+  top: 60px;
+  left: 10px;
   width: 100px;
   z-index: 3;
 `;
@@ -24,7 +28,8 @@ export const DropList = styled.li`
 `;
 
 export const MenuButton = styled.div`
-  margin-right: 50px !important;
+  margin-left: 40px;
+  margin-right: 20px;
   display: flex;
   font-size: 20px;
 `;
